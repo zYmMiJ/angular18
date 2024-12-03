@@ -1,0 +1,36 @@
+name: Deploy Angular to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Changez 'main' si votre branche par défaut a un autre nom
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Étape 1: Vérifier le code
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Étape 2: Configurer Node.js
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18 # Utilisez la version de Node.js compatible avec Angular
+
+    # Étape 3: Installer les dépendances
+    - name: Install dependencies
+      run: npm install
+
+    # Étape 4: Lancer la build de production Angular
+    - name: Build Angular app
+      run: npm run build -- --base-href "https://<USERNAME>.github.io/<REPOSITORY>/"
+
+    # Étape 5: Déployer sur GitHub Pages
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: gh-pages
+        folder: dist/angular18
