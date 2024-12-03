@@ -26,11 +26,11 @@ jobs:
 
     # Étape 4: Lancer la build de production Angular
     - name: Build Angular app
-      run: npm run build -- --base-href "https://zYmMiJ.github.io/"
+      run: npm run build -- --base-href "https://zYmMiJ.github.io/angular18/"
 
     # Étape 5: Déployer sur GitHub Pages
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         branch: gh-pages
-        folder: dist
+        folder: dist/angular18
